@@ -61,7 +61,7 @@ const checkLoggedIn = (req, res, next) => {
 
 const viewsPath = path.join(__dirname, "views");
 // console.log(viewsPath);
-app.set('views', viewsPath);
+app.set("views", viewsPath);
 app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
@@ -101,46 +101,49 @@ app.post(
 
 app.get("/dashboard", checkAuthenticated, (req, res) => {
   console.log("/dashboard");
-//   res.render("pages/dashboard.ejs", 
-//   { user: req.user }
-// );
-  res.send(req.user);
-});
+  //   res.render("pages/dashboard.ejs",
+  //   { user: req.user }
+  // );
 
-app.get("/admin/users", authRole, async (req, res) => {
-  console.log("/admin/users");
-
-  const users = await usersController.getAll();
-  res.render("pages/admin/users.ejs", {
+  res.render(`${process.env.CLIENT_URL}/dashboard.tsx`, {
     user: req.user,
-    users,
   });
 });
 
-app.get("/admin/users/add", authRole, async (req, res) => {
-  console.log("/admin/users/add");
+// app.get("/admin/users", authRole, async (req, res) => {
+//   console.log("/admin/users");
 
-  res.render("pages/admin/users_add.ejs", {
-    user: req.user,
-    users,
-  });
-});
+//   const users = await usersController.getAll();
+//   res.render("pages/admin/users.ejs", {
+//     user: req.user,
+//     users,
+//   });
+// });
 
-app.post("/admin/users/add", authRole, async (req, res) => {
-  console.log("/admin/users/add");
-  console.log("req.body: ", req.body);
+// app.get("/admin/users/add", authRole, async (req, res) => {
+//   console.log("/admin/users/add");
 
-  const userDb = await usersController.createUser(req.body);
-  res.render("pages/admin/users");
-});
+//   res.render("pages/admin/users_add.ejs", {
+//     user: req.user,
+//     users,
+//   });
+// });
 
-app.get("/admin/users/edit/:id", authRole, async (req, res) => {
-  console.log("/admin/users/edit/:id");
-  console.log("req.body: ", req.body);
+// app.post("/admin/users/add", authRole, async (req, res) => {
+//   console.log("/admin/users/add");
+//   console.log("req.body: ", req.body);
 
-  const userDb = await usersController.createUser(req.body);
-  res.render("pages/admin/users");
-});
+//   const userDb = await usersController.createUser(req.body);
+//   res.render("pages/admin/users");
+// });
+
+// app.get("/admin/users/edit/:id", authRole, async (req, res) => {
+//   console.log("/admin/users/edit/:id");
+//   console.log("req.body: ", req.body);
+
+//   const userDb = await usersController.createUser(req.body);
+//   res.render("pages/admin/users");
+// });
 
 app.get("/logout", (req, res) => {
   req.logout(function (err) {
@@ -167,7 +170,7 @@ app.get("/", (req, res) => {
   //   user: req.user
   // });
 
-  res.send('Witam na serwerze !!!');
+  res.send("Witam na serwerze !!!");
 });
 
 app.listen(PORT);
