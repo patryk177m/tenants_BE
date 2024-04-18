@@ -72,7 +72,7 @@ app.get("/register", checkLoggedIn, (req, res) => {
   //   user: req.user,
   // });
 
-  res.render(`${process.env.CLIENT_URL}/register.tsx`, {
+  res.render(`${process.env.CLIENT_URL}/register`, {
     user: req.user,
   });
 });
@@ -91,7 +91,7 @@ app.get("/login", checkLoggedIn, (req, res) => {
   // res.render("pages/login.ejs", {
   //   user: req.user,
   // });
-  res.render(`${process.env.CLIENT_URL}/login.tsx`, {
+  res.render(`${process.env.CLIENT_URL}/login`, {
     user: req.user,
   });
 });
@@ -110,7 +110,7 @@ app.get("/dashboard", checkAuthenticated, (req, res) => {
   //   { user: req.user }
   // );
 
-  res.render(`${process.env.CLIENT_URL}/dashboard.tsx`, {
+  res.render(`${process.env.CLIENT_URL}/dashboard`, {
     user: req.user,
   });
 });
@@ -175,7 +175,7 @@ app.get("/", (req, res) => {
   //   user: req.user
   // });
 
-  res.render(`${process.env.CLIENT_URL}/../App.tsx`)
+  res.render(`${process.env.CLIENT_URL}/App`)
 });
 
 app.listen(PORT);
