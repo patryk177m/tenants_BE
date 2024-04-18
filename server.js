@@ -11,9 +11,9 @@ import { authRole } from "./src/utils/aclauth.js";
 import { usersController } from "./src/controllers/UsersController.js";
 import cors from "cors";
 
-// import { sequelize } from './src/utils/db.js';
-// import './src/models/user-model.js';
-// sequelize.sync({ force: true });
+import { sequelize } from './src/utils/db.js';
+import './src/models/user-model.js';
+sequelize.sync({ force: true });
 
 const app = express();
 
@@ -67,9 +67,11 @@ app.use(express.static("./public"));
 
 app.get("/register", checkLoggedIn, (req, res) => {
   console.log("/register");
-  res.render("pages/register.ejs", {
-    user: req.user,
-  });
+  // res.render("pages/register.ejs", {
+  //   user: req.user,
+  // });
+
+  res.send(req.user);
 });
 
 app.post(
@@ -83,9 +85,9 @@ app.post(
 app.get("/login", checkLoggedIn, (req, res) => {
   console.log("/login");
 
-  res.render("pages/login.ejs", {
-    user: req.user,
-  });
+  // res.render("pages/login.ejs", {
+  //   user: req.user,
+  // });
   res.send(req.user);
 });
 
@@ -161,9 +163,11 @@ app.post("/logout", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("pages/index", {
-    user: req.user
-  });
+  // res.render("pages/index", {
+  //   user: req.user
+  // });
+
+  res.send(req.user);
 });
 
 app.listen(PORT);
