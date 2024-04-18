@@ -161,7 +161,7 @@ app.post("/logout", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("/pages/index.ejs", {
+  res.render("pages/index", {
     user: req.user
   });
 });
