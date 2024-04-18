@@ -59,7 +59,7 @@ const checkLoggedIn = (req, res, next) => {
   next();
 };
 
-const viewsPath = path.join(__dirname, "src/views");
+const viewsPath = path.join(__dirname, "views");
 console.log(viewsPath);
 app.set("views", viewsPath);
 app.set("view engine", "ejs");
