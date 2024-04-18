@@ -27,7 +27,7 @@ app.use(
 app.use(express.json());
 // const __dirname = dirname(fileURLToPath(process.env.PATH_APP));
 
-// const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 // console.log(__dirname);
 app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 5000;
@@ -59,10 +59,10 @@ const checkLoggedIn = (req, res, next) => {
   next();
 };
 
-// const viewsPath = path.join(__dirname, "components");
+const viewsPath = path.join(__dirname, "components");
 // console.log(viewsPath);
-// app.set("views", viewsPath);
-// app.set("view engine", "ejs");
+app.set("views", viewsPath);
+app.set("view engine", "tsx");
 app.use(express.static("./public"));
 
 app.get("/register", checkLoggedIn, (req, res) => {
@@ -71,7 +71,7 @@ app.get("/register", checkLoggedIn, (req, res) => {
   //   user: req.user,
   // });
 
-  res.render(`${process.env.CLIENT_URL}/register`, {
+  res.render(`${process.env.CLIENT_URL}/register.tsx`, {
     user: req.user,
   });
 });
@@ -90,7 +90,7 @@ app.get("/login", checkLoggedIn, (req, res) => {
   // res.render("pages/login.ejs", {
   //   user: req.user,
   // });
-  res.render(`${process.env.CLIENT_URL}/login`, {
+  res.render(`${process.env.CLIENT_URL}/login.tsx`, {
     user: req.user,
   });
 });
