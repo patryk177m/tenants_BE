@@ -62,7 +62,7 @@ const checkLoggedIn = (req, res, next) => {
 const viewsPath = path.join(__dirname, "views");
 // console.log(viewsPath);
 app.set("views", viewsPath);
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
 app.get("/register", checkLoggedIn, (req, res) => {
@@ -71,7 +71,7 @@ app.get("/register", checkLoggedIn, (req, res) => {
   //   user: req.user,
   // });
 
-  res.render(`${process.env.CLIENT_URL}/register.tsx`, {
+  res.render(`${process.env.CLIENT_URL}/register`, {
     user: req.user,
   });
 });
@@ -90,7 +90,7 @@ app.get("/login", checkLoggedIn, (req, res) => {
   // res.render("pages/login.ejs", {
   //   user: req.user,
   // });
-  res.render(`${process.env.CLIENT_URL}/login.tsx`, {
+  res.render(`${process.env.CLIENT_URL}/login`, {
     user: req.user,
   });
 });
