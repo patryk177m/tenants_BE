@@ -62,7 +62,6 @@ const checkLoggedIn = (req, res, next) => {
 const viewsPath = path.join(__dirname, "components");
 // console.log(viewsPath);
 app.set("views", viewsPath);
-// app.set("view engine", "js");
 app.set('view engine', 'pug')
 app.use(express.static("./public"));
 
@@ -72,9 +71,11 @@ app.get("/register", checkLoggedIn, (req, res) => {
   //   user: req.user,
   // });
 
-  res.render(`${process.env.CLIENT_URL}/register`, {
-    user: req.user,
-  });
+  // res.render(`${process.env.CLIENT_URL}/register`, {
+  //   user: req.user,
+  // });
+
+  res.send(req.user);
 });
 
 app.post(
@@ -91,9 +92,12 @@ app.get("/login", checkLoggedIn, (req, res) => {
   // res.render("pages/login.ejs", {
   //   user: req.user,
   // });
-  res.render(`${process.env.CLIENT_URL}/login`, {
-    user: req.user,
-  });
+
+  // res.render(`${process.env.CLIENT_URL}/login`, {
+  //   user: req.user,
+  // });
+
+  res.send(req.user);
 });
 
 app.post(
@@ -110,9 +114,11 @@ app.get("/dashboard", checkAuthenticated, (req, res) => {
   //   { user: req.user }
   // );
 
-  res.render(`${process.env.CLIENT_URL}/dashboard`, {
-    user: req.user,
-  });
+  // res.render(`${process.env.CLIENT_URL}/dashboard`, {
+  //   user: req.user,
+  // });
+
+  res.send(req.user);
 });
 
 // app.get("/admin/users", authRole, async (req, res) => {
