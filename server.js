@@ -167,7 +167,7 @@ app.get("/", (req, res) => {
   //   user: req.user
   // });
 
-  res.send(req.user);
+  res.send('Witam na serwerze !!!');
 });
 
 app.listen(PORT);
