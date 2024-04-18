@@ -60,8 +60,8 @@ const checkLoggedIn = (req, res, next) => {
 };
 
 // const viewsPath = path.join(__dirname, "views");
-// console.log(viewsPath);
-// app.set("views", viewsPath);
+console.log(viewsPath);
+app.set('views', '/opt/render/project/src/views');
 app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
