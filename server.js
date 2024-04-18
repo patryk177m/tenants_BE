@@ -181,7 +181,7 @@ app.get("/", (req, res) => {
   //   user: req.user
   // });
 
-  res.render(`${process.env.CLIENT_URL}/App`)
+  res.send("Witaj przyjacielu !");
 });
 
 app.listen(PORT);
