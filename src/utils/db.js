@@ -6,7 +6,14 @@ export const sequelize = new Sequelize({
   database: process.env.POSTGRES_DATABASE,
   username: process.env.POSTGRES_USERNAME,
   password: process.env.POSTGRES_PASSWORD,
-  logging: false
+  port: process.env.PORT_DB,
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Tylko jeśli serwer PostgreSQL nie wymaga certyfikatu CA
+    }
+  }
 });
 
 async function connectDb() {

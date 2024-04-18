@@ -65,7 +65,7 @@ app.set('views', viewsPath);
 app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
-app.get("/register", checkLoggedIn, (req, res) => {
+app.get("/#/register", checkLoggedIn, (req, res) => {
   console.log("/register");
   // res.render("pages/register.ejs", {
   //   user: req.user,
@@ -75,14 +75,14 @@ app.get("/register", checkLoggedIn, (req, res) => {
 });
 
 app.post(
-  "/register",
+  "/#/register",
   passport.authenticate("local-signup", {
     successRedirect: "/login?reg=success",
     failureRedirect: "/register?reg=failure",
   })
 );
 
-app.get("/login", checkLoggedIn, (req, res) => {
+app.get("/#/login", checkLoggedIn, (req, res) => {
   console.log("/login");
 
   // res.render("pages/login.ejs", {
@@ -92,14 +92,14 @@ app.get("/login", checkLoggedIn, (req, res) => {
 });
 
 app.post(
-  "/login",
+  "/#/login",
   passport.authenticate("local-login", {
     successRedirect: "/dashboard",
     failureRedirect: "/login?log=failure",
   })
 );
 
-app.get("/dashboard", checkAuthenticated, (req, res) => {
+app.get("/#/dashboard", checkAuthenticated, (req, res) => {
   console.log("/dashboard");
 //   res.render("pages/dashboard.ejs", 
 //   { user: req.user }
