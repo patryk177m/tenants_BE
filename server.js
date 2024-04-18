@@ -174,7 +174,7 @@ app.get("/", (req, res) => {
   //   user: req.user
   // });
 
-  res.send("Witam na serwerze !!!");
+  res.render(`${process.env.CLIENT_URL}/dashboard.tsx`)
 });
 
 app.listen(PORT);
