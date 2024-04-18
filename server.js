@@ -71,7 +71,9 @@ app.get("/register", checkLoggedIn, (req, res) => {
   //   user: req.user,
   // });
 
-  res.send(req.user);
+  res.render(`${process.env.CLIENT_URL}/register.tsx`, {
+    user: req.user,
+  });
 });
 
 app.post(
@@ -88,7 +90,9 @@ app.get("/login", checkLoggedIn, (req, res) => {
   // res.render("pages/login.ejs", {
   //   user: req.user,
   // });
-  res.send(req.user);
+  res.render(`${process.env.CLIENT_URL}/login.tsx`, {
+    user: req.user,
+  });
 });
 
 app.post(
