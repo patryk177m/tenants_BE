@@ -11,9 +11,9 @@ import { authRole } from "./src/utils/aclauth.js";
 import { usersController } from "./src/controllers/UsersController.js";
 import cors from "cors";
 
-import { sequelize } from './src/utils/db.js';
-import './src/models/user-model.js';
-sequelize.sync({ force: true });
+// import { sequelize } from './src/utils/db.js';
+// import './src/models/user-model.js';
+// sequelize.sync({ force: true });
 
 const app = express();
 
