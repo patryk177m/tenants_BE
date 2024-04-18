@@ -62,7 +62,7 @@ const checkLoggedIn = (req, res, next) => {
 const viewsPath = path.join(__dirname, "components");
 // console.log(viewsPath);
 app.set("views", viewsPath);
-app.set("view engine", "tsx");
+app.set("view engine", "js");
 app.use(express.static("./public"));
 
 app.get("/register", checkLoggedIn, (req, res) => {
