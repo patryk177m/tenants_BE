@@ -27,7 +27,7 @@ app.use(
 app.use(express.json());
 // const __dirname = dirname(fileURLToPath(process.env.PATH_APP));
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// const __dirname = dirname(fileURLToPath(import.meta.url));
 // console.log(__dirname);
 app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 5000;
@@ -59,21 +59,13 @@ const checkLoggedIn = (req, res, next) => {
   next();
 };
 
-const viewsPath = path.join(__dirname, "components");
-// console.log(viewsPath);
-app.set("views", viewsPath);
-app.set('view engine', 'pug')
+// const viewsPath = path.join(__dirname, "components");
+// app.set("views", viewsPath);
+// app.set('view engine', 'pug')
 app.use(express.static("./public"));
 
 app.get("/register", checkLoggedIn, (req, res) => {
   console.log("/register");
-  // res.render("pages/register.ejs", {
-  //   user: req.user,
-  // });
-
-  // res.render(`${process.env.CLIENT_URL}/register`, {
-  //   user: req.user,
-  // });
 
   res.send(req.user);
 });
@@ -89,14 +81,6 @@ app.post(
 app.get("/login", checkLoggedIn, (req, res) => {
   console.log("/login");
 
-  // res.render("pages/login.ejs", {
-  //   user: req.user,
-  // });
-
-  // res.render(`${process.env.CLIENT_URL}/login`, {
-  //   user: req.user,
-  // });
-
   res.send(req.user);
 });
 
@@ -110,14 +94,7 @@ app.post(
 
 app.get("/dashboard", checkAuthenticated, (req, res) => {
   console.log("/dashboard");
-  //   res.render("pages/dashboard.ejs",
-  //   { user: req.user }
-  // );
-
-  // res.render(`${process.env.CLIENT_URL}/dashboard`, {
-  //   user: req.user,
-  // });
-
+  
   res.send(req.user);
 });
 
@@ -177,11 +154,8 @@ app.post("/logout", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  // res.render("pages/index", {
-  //   user: req.user
-  // });
 
-  res.send("Witaj przyjacielu !");
+  res.send("Witaj na serwerze APP-TENANT !");
 });
 
 app.listen(PORT);
