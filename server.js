@@ -31,6 +31,7 @@ app.use(express.json());
 // console.log(__dirname);
 app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 5000;
+const CLIENT_URL = process.env.CLIENT_URL;
 
 app.use(
   expressSession({
@@ -53,7 +54,7 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect("/dashboard");
+    return res.redirect(`${CLIENT_URL}/dashboard`);
   }
 
   next();
@@ -73,12 +74,12 @@ app.get("/register", checkLoggedIn, (req, res) => {
 app.post(
   "/register",
   passport.authenticate("local-signup", {
-    successRedirect: "/login?reg=success",
-    failureRedirect: "/register?reg=failure",
+    successRedirect: `${CLIENT_URL}/login?reg=success`,
+    failureRedirect: `${CLIENT_URL}/register?reg=failure`,
   })
 );
 
-app.get("/login", checkLoggedIn, (req, res) => {
+app.get(`${CLIENT_URL}/login`, checkLoggedIn, (req, res) => {
   console.log("/login");
 
   res.send(req.user);
@@ -87,12 +88,12 @@ app.get("/login", checkLoggedIn, (req, res) => {
 app.post(
   "/login",
   passport.authenticate("local-login", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/login?log=failure",
+    successRedirect: `${CLIENT_URL}/dashboard`,
+    failureRedirect: `${CLIENT_URL}/login?log=failure`,
   })
 );
 
-app.get("/dashboard", checkAuthenticated, (req, res) => {
+app.get(`${CLIENT_URL}/dashboard`, checkAuthenticated, (req, res) => {
   console.log("/dashboard");
   
   res.send(req.user);
@@ -133,27 +134,27 @@ app.get("/dashboard", checkAuthenticated, (req, res) => {
 //   res.render("pages/admin/users");
 // });
 
-app.get("/logout", (req, res) => {
+app.get(`${CLIENT_URL}/logout`, (req, res) => {
   req.logout(function (err) {
     console.log("User logged out!");
 
     if (err) return next(err);
 
-    res.redirect("/");
+    res.redirect(`${CLIENT_URL}/`);
   });
 });
 
-app.post("/logout", (req, res) => {
+app.post(`${CLIENT_URL}/logout`, (req, res) => {
   req.logout(function (err) {
     console.log("User logged out!");
 
     if (err) return next(err);
 
-    res.redirect("/");
+    res.redirect(`${CLIENT_URL}/`);
   });
 });
 
-app.get("/", (req, res) => {
+app.get(`${CLIENT_URL}/`, (req, res) => {
 
   res.send("Witaj na serwerze APP-TENANT !");
 });
