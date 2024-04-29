@@ -49,7 +49,7 @@ const checkAuthenticated = (req, res, next) => {
     return next();
   }
 
-  res.redirect("/");
+  res.redirect(`${CLIENT_URL}/`);
 };
 
 const checkLoggedIn = (req, res, next) => {
@@ -65,14 +65,14 @@ const checkLoggedIn = (req, res, next) => {
 // app.set('view engine', 'pug')
 app.use(express.static("./public"));
 
-app.get("/register", checkLoggedIn, (req, res) => {
+app.get(`${CLIENT_URL}/register`, checkLoggedIn, (req, res) => {
   console.log("/register");
 
   res.send(req.user);
 });
 
 app.post(
-  "/register",
+  `${CLIENT_URL}/register`,
   passport.authenticate("local-signup", {
     successRedirect: `${CLIENT_URL}/login?reg=success`,
     failureRedirect: `${CLIENT_URL}/register?reg=failure`,
@@ -86,7 +86,7 @@ app.get(`${CLIENT_URL}/login`, checkLoggedIn, (req, res) => {
 });
 
 app.post(
-  "/login",
+  `${CLIENT_URL}/login`,
   passport.authenticate("local-login", {
     successRedirect: `${CLIENT_URL}/dashboard`,
     failureRedirect: `${CLIENT_URL}/login?log=failure`,
