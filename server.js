@@ -2,13 +2,6 @@ import "dotenv/config";
 import express from "express";
 import { passport } from "./src/utils/auth.js";
 import expressSession from "express-session";
-import * as path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-import { authRole } from "./src/utils/aclauth.js";
-
-import { usersController } from "./src/controllers/UsersController.js";
 import cors from "cors";
 
 // import { sequelize } from './src/utils/db.js';
@@ -25,12 +18,9 @@ app.use(
 );
 
 app.use(express.json());
-// const __dirname = dirname(fileURLToPath(process.env.PATH_APP));
-
-// const __dirname = dirname(fileURLToPath(import.meta.url));
-// console.log(__dirname);
 app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 5000;
+const URL = process.env.CLIENT_URL;
 
 app.use(
   expressSession({
@@ -53,7 +43,7 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect(`/dashboard`);
+    return res.redirect(`${URL}/dashboard`);
   }
 
   next();
@@ -87,7 +77,7 @@ app.get(`/login`, checkLoggedIn, (req, res) => {
 app.post(
   `/login`,
   passport.authenticate("local-login", {
-    successRedirect: `/dashboard`,
+    successRedirect: `${URL}/dashboard`,
     failureRedirect: `/login?log=failure`,
   })
 );
