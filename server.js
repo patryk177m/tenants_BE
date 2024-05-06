@@ -43,7 +43,7 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect(`/dashboard`);
+    return res.redirect(`${URL}/dashboard`);
   }
 
   next();
@@ -77,12 +77,12 @@ app.get(`/login`, checkLoggedIn, (req, res) => {
 app.post(
   `/login`,
   passport.authenticate("local-login", {
-    successRedirect: `/dashboard`,
+    successRedirect: `${URL}/dashboard`,
     failureRedirect: `/login?log=failure`,
   })
 );
 
-app.get(`/dashboard`, checkAuthenticated, (req, res) => {
+app.get(`${URL}/dashboard`, checkAuthenticated, (req, res) => {
   console.log("/dashboard");
   
   res.send(req.user);
