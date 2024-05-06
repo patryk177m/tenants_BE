@@ -77,12 +77,12 @@ app.get(`/login`, checkLoggedIn, (req, res) => {
 app.post(
   `/login`,
   passport.authenticate("local-login", {
-    successRedirect: `${URL}/dashboard`,
+    successRedirect: `/dashboard`,
     failureRedirect: `/login?log=failure`,
   })
 );
 
-app.get(`${URL}/dashboard`, checkAuthenticated, (req, res) => {
+app.get(`/dashboard`, checkAuthenticated, (req, res) => {
   console.log("/dashboard");
   
   res.send(req.user);

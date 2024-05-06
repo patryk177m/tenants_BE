@@ -15,12 +15,12 @@ const usersRoles = [
   {
     role: "tenant",
     priority: 3,
-    allows: [{ resource: `${URL}/dashboard`, permissions: ["post"] }],
+    allows: [{ resource: `/dashboard`, permissions: ["post"] }],
   },
   {
     role: "lodger",
     priority: 2,
-    allows: [{ resource: `${URL}/dashboard`, permissions: ["post", "get"] }],
+    allows: [{ resource: `/dashboard`, permissions: ["post", "get"] }],
   },
   {
     role: "guest",
