@@ -3,9 +3,11 @@ import express from "express";
 import { passport } from "./src/utils/auth.js";
 import expressSession from "express-session";
 import cors from "cors";
+import router from './src/routers/routers.js';
 
 // import { sequelize } from './src/utils/db.js';
 // import './src/models/user-model.js';
+// import './src/models/bill-model.js';
 // sequelize.sync({ force: true });
 
 const app = express();
@@ -43,15 +45,12 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect(`${URL}/dashboard`);
+    return res.redirect(`/dashboard`);
   }
 
   next();
 };
 
-// const viewsPath = path.join(__dirname, "components");
-// app.set("views", viewsPath);
-// app.set('view engine', 'pug')
 app.use(express.static("./public"));
 
 app.get(`/register`, checkLoggedIn, (req, res) => {
@@ -77,7 +76,7 @@ app.get(`/login`, checkLoggedIn, (req, res) => {
 app.post(
   `/login`,
   passport.authenticate("local-login", {
-    successRedirect: `/dashboard`,
+    successRedirect: `${URL}/dashboard`,
     failureRedirect: `/login?log=failure`,
   })
 );
@@ -87,6 +86,10 @@ app.get(`/dashboard`, checkAuthenticated, (req, res) => {
   
   res.send(req.user);
 });
+
+app.get(`/user`, (req, res) => {
+  res.send("Hello world")
+})
 
 // app.get("/admin/users", authRole, async (req, res) => {
 //   console.log("/admin/users");
@@ -148,4 +151,11 @@ app.get(`/`, (req, res) => {
   res.send("Witaj na serwerze APP-TENANT !");
 });
 
-app.listen(PORT);
+
+// Najnowsze !!!
+
+app.use('/bills', router);
+
+app.listen(PORT, () => {
+  console.log(`Server działa na porcie ${PORT}`)
+});
