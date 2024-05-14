@@ -19,6 +19,7 @@ async function create(req, res) {
       sum,
       datepay,
       status,
+      dateadd: new Date(),
     });
 
     res.send(newBill);

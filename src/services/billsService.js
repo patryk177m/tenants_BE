@@ -10,7 +10,6 @@ async function create(billData) {
   } catch (err) {
     throw new Error('Error creating user: ' + err.message);
   }
-  return 
 }
 
 export const billsService = {

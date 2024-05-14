@@ -33,7 +33,7 @@ export const Bill = sequelize.define('Bill', {
     allowNull: false,
   },
   dateadd: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
     allowNull: true,
   },
 })
