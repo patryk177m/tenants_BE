@@ -29,8 +29,20 @@ async function create(req, res) {
   } 
 };
 
+async function deleteBill(req, res) {
+  const { id } = req.params;
+
+  try {
+    await billsService.deleteBill(Number(id));
+    return res.status(204).json("Bill has been succesfully deleted");
+  } catch (err) {
+    return res.status(500).json(err.message);
+  }
+}
+
 
 export const billsController = {
   getAll,
   create,
+  deleteBill,
 }
