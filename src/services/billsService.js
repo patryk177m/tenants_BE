@@ -12,6 +12,26 @@ async function create(billData) {
   }
 }
 
+async function getBillById(id) {
+  try {
+    
+    if (!id) {
+      throw new Error('The bill with the given id does not exist');
+    }
+
+    const bill = await Bill.findByPk(id);
+
+    if (!bill) {
+      throw new Error('Bill not found');
+    }
+
+    return bill;
+
+  } catch (err) {
+    throw new Error('Error bill: ' + err.message);
+  }
+}
+
 async function updateBill(id, data) {
   try {
     const bill = await Bill.findByPk(id);
@@ -19,7 +39,7 @@ async function updateBill(id, data) {
     if (!bill) {
       throw new Error('Bill not found');
     }
-    
+
     return await bill.update(data);
 
   } catch (err) {
@@ -41,6 +61,7 @@ async function deleteBill(id) {
 
 export const billsService = {
   getAll,
+  getBillById,
   create,
   updateBill,
   deleteBill,

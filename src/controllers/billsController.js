@@ -6,8 +6,19 @@ async function getAll(req, res) {
     res.send(billsData);
   } catch (err) {
     res.status(500).json({ err: message });
-  }
-}
+  };
+};
+
+async function getBillById(req, res) {
+  const { id } = req.params;
+
+  try {
+    const bill = await billsService.getBillById(id);
+    return res.status(200).json({ bill });
+  } catch (err) {
+    return res.status(500).json(err.message);
+  };
+};
 
 async function create(req, res) {
   const { supplier, title, sum, datepay, status } = req.body;
@@ -24,8 +35,8 @@ async function create(req, res) {
     res.send(newBill);
   } catch (err) {
     res.status(500).json({ error: err });
-  }
-}
+  };
+};
 
 async function updateBill(req, res) {
   const { id } = req.params;
@@ -34,8 +45,8 @@ async function updateBill(req, res) {
     return res.status(201).json(bill);
   } catch (err) {
     return res.status(400).json(err.message);
-  }
-}
+  };
+};
 
 async function deleteBill(req, res) {
   const { id } = req.params;
@@ -45,11 +56,12 @@ async function deleteBill(req, res) {
     return res.status(204).json("Bill has been succesfully deleted");
   } catch (err) {
     return res.status(500).json(err.message);
-  }
-}
+  };
+};
 
 export const billsController = {
   getAll,
+  getBillById,
   create,
   updateBill,
   deleteBill,

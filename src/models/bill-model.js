@@ -26,6 +26,10 @@ export const Bill = sequelize.define('Bill', {
   datepay: {
     type: DataTypes.DATE,
     allowNull: true,
+    get() {
+      const dateadd = this.getDataValue('datepay');
+      return dateadd ? dateadd.toISOString().slice(0, 10) : null; // Convert to string if not null
+    }
   },
   status: {
     type: DataTypes.ENUM('opłacone', 'nieopłacone', 'oczekujące', 'odrzucone', 'anulowane'),
@@ -35,5 +39,9 @@ export const Bill = sequelize.define('Bill', {
   dateadd: {
     type: DataTypes.DATE,
     allowNull: true,
+    get() {
+      const dateadd = this.getDataValue('dateadd');
+      return dateadd ? dateadd.toISOString().slice(0, 10) : null;
+    }
   },
 })
