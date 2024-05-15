@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { Bill } from "../models/bill-model.js";
 
 async function getAll() {
@@ -10,6 +9,21 @@ async function create(billData) {
     return await Bill.create(billData);
   } catch (err) {
     throw new Error('Error creating bill: ' + err.message);
+  }
+}
+
+async function updateBill(id, data) {
+  try {
+    const bill = await Bill.findByPk(id);
+
+    if (!bill) {
+      throw new Error('Bill not found');
+    }
+    
+    return await bill.update(data);
+
+  } catch (err) {
+    throw new Error('Error updating bill: ' + err.message);
   }
 }
 
@@ -28,5 +42,6 @@ async function deleteBill(id) {
 export const billsService = {
   getAll,
   create,
+  updateBill,
   deleteBill,
 }

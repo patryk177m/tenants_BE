@@ -1,14 +1,13 @@
 import { billsService } from "../services/billsService.js";
 
-
- async function getAll(req, res) {
+async function getAll(req, res) {
   try {
     const billsData = await billsService.getAll();
     res.send(billsData);
   } catch (err) {
-    res.status(500).json({ err: message});
+    res.status(500).json({ err: message });
   }
-};
+}
 
 async function create(req, res) {
   const { supplier, title, sum, datepay, status } = req.body;
@@ -23,11 +22,20 @@ async function create(req, res) {
     });
 
     res.send(newBill);
-
   } catch (err) {
-    res.status(500).json({ error: err});
-  } 
-};
+    res.status(500).json({ error: err });
+  }
+}
+
+async function updateBill(req, res) {
+  const { id } = req.params;
+  try {
+    const bill = await billsService.updateBill(Number(id), req.body);
+    return res.status(201).json(bill);
+  } catch (err) {
+    return res.status(400).json(err.message);
+  }
+}
 
 async function deleteBill(req, res) {
   const { id } = req.params;
@@ -40,9 +48,9 @@ async function deleteBill(req, res) {
   }
 }
 
-
 export const billsController = {
   getAll,
   create,
+  updateBill,
   deleteBill,
-}
+};
