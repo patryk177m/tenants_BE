@@ -3,7 +3,8 @@ import express from "express";
 import { passport } from "./src/utils/auth.js";
 import expressSession from "express-session";
 import cors from "cors";
-import router from './src/routers/routers.js';
+import billRouter from "./src/routers/billrouters.js";
+
 
 // import { sequelize } from './src/utils/db.js';
 // import './src/models/user-model.js';
@@ -83,13 +84,13 @@ app.post(
 
 app.get(`/dashboard`, checkAuthenticated, (req, res) => {
   console.log("/dashboard");
-  
+
   res.send(req.user);
 });
 
 app.get(`/user`, (req, res) => {
-  res.send("Hello world")
-})
+  res.send("Hello world");
+});
 
 // app.get("/admin/users", authRole, async (req, res) => {
 //   console.log("/admin/users");
@@ -147,15 +148,13 @@ app.post(`/logout`, (req, res) => {
 });
 
 app.get(`/`, (req, res) => {
-
   res.send("Witaj na serwerze APP-TENANT !");
 });
 
-
 // Najnowsze !!!
 
-app.use('/bills', router);
+app.use("/bills", billRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server działa na porcie ${PORT}`)
+  console.log(`Server działa na porcie ${PORT}`);
 });
