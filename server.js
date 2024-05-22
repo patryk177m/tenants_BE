@@ -4,11 +4,14 @@ import { passport } from "./src/utils/auth.js";
 import expressSession from "express-session";
 import cors from "cors";
 import billRouter from "./src/routers/billrouters.js";
+import cardRouter from "./src/routers/cardRouters.js";
+
 
 
 // import { sequelize } from './src/utils/db.js';
 // import './src/models/user-model.js';
 // import './src/models/bill-model.js';
+//   import './src/models/card-model.js';
 // sequelize.sync({ force: true });
 
 const app = express();
@@ -154,6 +157,7 @@ app.get(`/`, (req, res) => {
 // Najnowsze !!!
 
 app.use("/bills", billRouter);
+app.use('/card', cardRouter);
 
 app.listen(PORT, () => {
   console.log(`Server działa na porcie ${PORT}`);
