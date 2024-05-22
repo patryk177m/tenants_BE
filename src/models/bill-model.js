@@ -44,4 +44,9 @@ export const Bill = sequelize.define('Bill', {
       return dateadd ? dateadd.toISOString().slice(0, 10) : null;
     }
   },
+  issending: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
+  },
 })
