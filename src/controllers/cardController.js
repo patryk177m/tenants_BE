@@ -37,6 +37,16 @@ async function create(req, res) {
   } catch (err) {
     res.status(500).json({ error: err.message });
   };
+};
+
+async function deleteItem(req, res) {
+  const { id } = req.params;
+  try {
+    await cardService.deleteItem(Number(id));
+    return res.status(204).json("Item has been succesfully deleted");
+  } catch (err) {
+    return res.status(500).json(err.message);
+  }
 }
 
 
@@ -44,4 +54,5 @@ export const cardControllers = {
   getAll,
   getItemById,
   create,
+  deleteItem,
 }
